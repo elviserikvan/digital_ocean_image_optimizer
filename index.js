@@ -1,8 +1,8 @@
 const sharp = require('sharp');
+const BucketService = require('./bucket.service');
+const bucketService = new BucketService();
 
-// Input file
 const inputFile = 'input.jpg';
-// Output file
 const outputFile = 'output.webp';
 
 const outputQuality = 30;
