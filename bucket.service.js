@@ -62,6 +62,32 @@ class BucketService {
     }
   }
 
+  async getBase64ImageFromMinio(filename, folder) {
+    const fileName = `${folder}/${filename}`;
+    console.log({fileName})
+
+    try {
+      const data = await new Promise((resolve, reject) => {
+          this.minioClient.getObject(this.MINIO_BUCKET, fileName, function(err, dataStream) {
+            if (err) {
+            return reject(err);
+          }
+          const chunks = [];
+          dataStream.on('data', function(chunk) {
+            chunks.push(chunk);
+          });
+          dataStream.on('end', function() {
+            resolve(Buffer.concat(chunks));
+          });
+        });
+      });
+
+      return data
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  }
 
   async deleteFile(filename, folder) {
     try {
