@@ -4,10 +4,6 @@ const path = require('path');
 const { BucketService } = require('./bucket.service');
 const bucketService = new BucketService();
 
-function removeExtension(filename) {
-  return path.parse(filename).name;
-}
-
 const folder = 'experiences/17';
 const filename = '749ede23-02d5-4958-b796-515567d317a8.png';
 const outputQuality = 80;
